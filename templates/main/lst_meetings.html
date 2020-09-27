@@ -1,0 +1,64 @@
+{% extends 'main/teacher_dash.html' %}
+
+
+{% block sub-nav-block %}
+
+{% if std %}
+
+<li><a href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
+<li><a href="{% url 'meetings_today' std %}">Today</a></li>
+<li><a href="{% url 'meetings_all' std %}">All</a></li>
+<li><a href="{% url 'stu_all' std %}">Students</a></li>
+
+{% else %}
+
+<li><a href="{% url 'dashboard_pg' %}">Upcoming</a></li>
+<li><a href="{% url 'mtoday_meets' %}">Today</a></li>
+<li><a href="{% url 'mall_meets' %}">All</a></li>
+
+{% endif %}
+
+{% if std %}
+
+
+
+{% endif %}
+
+{% endblock sub-nav-block %}
+
+
+{% block meetings %}
+
+{% for meeting in meetings %}
+
+
+<div class="meeting">
+    <a style="text-decoration: none" href="#">
+        <h2 class="meeting-topic">{{meeting.topic}}</h2>
+        <h5>{{meeting.subject}}</h5>
+        <h5>Time: {{meeting.time}}</h5>
+        <h5>link: {{meeting.link}}</h5>
+        <h5>Status: {{meeting.status}}</h5>
+        <div class="btn-container">
+            {% if meeting.subject.teacher.user == request.user %}
+            {% if meeting.status == "Concluded" %}
+            <a class="btn btn-success" href="{% url 'conclude_meeting_pg' meeting.id %}"><i
+                    class="fa fa-graduation-cap"></i> <span>Incomplete</span></a>
+            {% else %}
+            <a class="btn btn-success" href="{% url 'conclude_meeting_pg' meeting.id %}"><i class="fa fa-check"></i>
+                <span>Conclude</span></a>
+            {% endif %}
+            {% if meeting.status == "Deleted" %}
+            <a class="btn btn-danger" href="{% url 'restore_meeting_pg' meeting.id %}"><i class="fa fa-repeat"></i>
+                <span>Restore</span></a>
+            {% else %}
+            <a class="btn btn-danger" href="{% url 'del_meeting_pg' meeting.id %}"><i class="fa fa-trash"></i>
+                <span>Delete</span></a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </a>
+</div>
+
+{% endfor %}
+{% endblock meetings %}

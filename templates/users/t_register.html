@@ -1,0 +1,38 @@
+{% extends 'users/base_reg.html' %}
+
+
+{% block content %}
+
+<form action="{% url 'teacher_registeration_pg' %}" method="post">
+    {% csrf_token %}
+    <div class="name-container">
+        {{form.first_name}}
+        {{form.last_name}}
+    </div>
+    <div class="username-container form-inputs">
+        {{form.username}}
+    </div>
+    <div class="verification-code">
+        <input class="form-control" type="text" name="vrf_cd" id="vrf_cd" maxlength="5" placeholder="verification code">
+    </div>
+    <div class="user-fields">
+        {{form.email}}
+        {{form.password1}}
+        {{form.password2}}
+    </div>
+    <div class="form-errors">
+        {{form.errors}}
+    </div>
+    {% if messages %}
+    <div class="form-messages">
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in"
+        style="background:#0277bd;">Submit</button>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'users/login.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container" style="margin-top: 67px;">
+        <div id="login" class="signin-card">
+            <i class="fa fa-graduation-cap" style="font-size: 105px;"></i>
+            <h1 class="display1">Login</h1>
+            <form action="{% url 'login_pg' %}" method="post">
+                {% csrf_token %}
+                <div id="form-login-section" class="form-group">
+                    <input id="username" class="form-control" name="username" type="text" size="18"
+                        placeholder="username eg (jhon16)" required>
+                </div>
+                <div id="form-login-section" class="form-group">
+                    <input id="passwd" class="form-control" name="password" type="password" size="18"
+                        placeholder="password" required>
+                    <a href="#" style="float: right; margin-bottom: 8px;">Forgot Password ?</a>
+                </div>
+                {% if messages %}
+                <div class="form-messages">
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div>
+                    <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in"
+                        style="background:#0277bd;">Sign
+                        in</button>
+                </div>
+        </div>
+        <footer>
+            <center>
+                <a href='https://www.freepik.com/vectors/background'>Background vector created by freepik -
+                    www.freepik.com</a>
+            </center>
+        </footer>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

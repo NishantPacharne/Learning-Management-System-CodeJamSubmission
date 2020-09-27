@@ -1,0 +1,66 @@
+{% extends 'main/teacher_dash.html' %}
+
+{% block sub-nav-block %}
+
+<li><a href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
+<li><a href="{% url 'meetings_today' std %}">Today</a></li>
+<li><a href="{% url 'meetings_all' std %}">All</a></li>
+<li><a href="{% url 'stu_all' std %}">Students</a></li>
+
+{% endblock sub-nav-block %}
+
+{% block students %}
+
+<section id="students-container">
+    <span>Div: A</span>
+
+    <table class="table table-sm">
+        <tr>
+            <th>Roll no</th>
+            <th class="student-name" >Name</th>
+            <th class="meets-attended">Meetings attended</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for student in students_a %}
+        <tr>
+            <td>{{student.rollno}}</td>
+            <td class="student-name" >{{student.user.first_name}} {{student.father_name}} {{student.user.last_name}}</td>
+            <td class="meets-attended">24</td>
+            <td><a href="{% url 'view_student_pg' student.rollno %}"class="btn btn-primary"><i class="fa fa-graduation-cap"></i><span> View</span></a></td>
+            <td><a href="#"class="btn btn-danger"><i class="fa fa-trash"></i> <span>Delete</span></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <span>Div: B</span>
+    <table class="table table-sm">
+        <tr>
+            <th>Roll no</th>
+            <th class="student-name" >Name</th>
+            <th class="meets-attended">Meetings attended</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for student in students_b %}
+        <tr>
+            <td>{{student.rollno}}</td>
+            <td class="student-name" >{{student.user.first_name}} {{student.father_name}} {{student.user.last_name}}</td>
+            <td class="meets-attended">24</td>
+            <td><a href="{% url 'view_student_pg' student.rollno %}"class="btn btn-primary"><i class="fa fa-graduation-cap"></i><span> View</span></a></td>
+            <td><a href="#"class="btn btn-danger"><i class="fa fa-trash"></i> <span>Delete</span></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
+
+{% endblock students %}
+
+
+{% block add-meeting %}
+
+
+{% endblock add-meeting %}

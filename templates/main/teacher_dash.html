@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'main/css/teacher_dash.css' %}">
+
+
+{% block sub-nav-block %}
+
+
+
+{% endblock sub-nav-block %}
+
+
+{% block side-menu-block %}
+
+
+<a href="{% url 'dashboard_pg' %}"><i class="fa fa-video-camera"></i><span>My Meetings</span></a>
+<a href="{% url 'list_meetings_pg' 8 %}"><i> 8</i><span>8th</span></a>
+<a href="{% url 'list_meetings_pg' 9 %}"><i> 9</i><span>9th</span></a>
+<a href="{% url 'list_meetings_pg' 10 %}"><i>10</i><span>10th</span></a>
+
+{% endblock side-menu-block %}
+
+{% block meetings %}
+
+
+{% endblock meetings %}
+
+
+{% block add-meeting %}
+
+<div class="add-meeting">
+    <a href="{% url 'crt_meeting_pg' %}">
+        <i class="fa fa-plus"></i>
+        <span>Add Meeting</span>
+    </a>
+</div>
+
+{% endblock add-meeting %}
+
+{% block student-info %}
+
+
+
+{% endblock student-info %}

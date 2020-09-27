@@ -1,0 +1,53 @@
+{% extends 'main/teacher_dash.html' %}
+
+
+
+
+
+{% block student-info %}
+
+<section id="student-info">
+    <div class="row">
+        <div class="col-md" style="margin-bottom: 20px;">
+            <div class="card card-body">
+                <h5>Student Info</h5>
+                <hr>
+                <p>Name: {{student.user.first_name}} {{student.fathers_name}} {{student.user.last_name}}</p>
+                <p>Email: {{student.user.email}}</p>
+                <p>Roll no: {{student.rollno}}</p>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Meetings info</h5>
+                <hr>
+                <p>Total Meetings attended: </p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section id="student-meetings">
+    <h5>Meetings attended: </h5>
+    <table class="table table-sm">
+        <tr>
+            <th>Topic</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Python</td>
+            <td>Computer</td>
+            <td>12/3/20</td>
+            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+        </tr>
+    </table>
+</section>
+
+{% endblock student-info %}
+
+{% block add-meeting %}
+
+
+{% endblock add-meeting %}

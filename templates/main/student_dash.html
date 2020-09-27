@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+
+{% block sub-nav-block %}
+
+<li><a href="#">Upcoming</a></li>
+<li><a href="#">Today</a></li>
+<li><a href="#">All</a></li>
+
+{% endblock sub-nav-block %}
+
+
+
+{% block side-menu-block %}
+
+<a href="{% url 'dashboard_pg' %}"><i class="fa fa-video-camera"></i><span>Meetings</span></a>
+
+{% endblock side-menu-block %}
+
+{% block meetings %}
+
+{% for meeting in meetings %}
+
+<div class="meeting">
+    <h2 class="meeting-topic">{{meeting.topic}}</h2>
+        <h5>{{meeting.subject}}</h5>
+        <h5>Time: {{meeting.time}}</h5>
+        <h5>link: {{meeting.link}}</h5>
+        <h5>Status: {{meeting.status}}</h5>
+    <form class="attendance-form">
+        <input class="attendance-radio-button" name="attendance" id="btn-1"type="radio" value="P">
+        <label class="p-label" for="btn-1">P</label>
+        <input class="attendance-radio-button" name="attendance" id="btn-2"type="radio" value="A">
+        <label for="btn-2">A</label>
+        <button type ="submit"><i class="fa fa-check"></i></button>
+    </form>
+</div>
+
+{% endfor %}
+
+{% endblock meetings %}

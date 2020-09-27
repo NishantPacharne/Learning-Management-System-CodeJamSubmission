@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    <script src="{% static 'main/js/base.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" id="menu-inp">
+        <nav>
+            <label class="logo"><b>N</b>-CONNECT</label>
+            <ul>
+                <li>
+                    <h6>Hi, {{request.user.first_name}}</h6>
+                </li>
+                <li><a href="{% url 'logout_pg' %}">Logout</a></li>
+            </ul>
+            <label class="menu-icn" for="menu-inp"><i class="fa fa-bars"></i></label>
+        </nav>
+        <div class="side-menu">
+            <center>
+                <i style="font-size:73px;" class="fa fa-user-circle-o"></i>
+            </center>
+            {% block side-menu-block %}
+
+            {% endblock side-menu-block %}
+            <a href="#"><i class="fa fa-envelope"></i><span>Contact</span></a>
+            <a href="#"><i class="fa fa-cog"></i><span>Settings</span></a>
+            <a href="{% url 'logout_pg' %}" class="log-out"><i class="fa fa-sign-out"></i><span>Logout</span></a>
+        </div>
+        <div class="sub-nav">
+            <ul>
+                {% block sub-nav-block %}
+
+                {% endblock sub-nav-block %}
+            </ul>
+        </div>
+        {% block add-meeting %}
+
+        {% endblock add-meeting %}
+    </header>
+    <section id="meetings-container">
+        {% block meetings %}
+
+        {% endblock meetings %}
+    </section>
+        {% block students %}
+
+
+
+        {% endblock students %}
+
+        {% block student-creation-form %}
+
+
+        {% endblock student-creation-form %}
+
+        {% block student-info %}
+
+        
+
+        {% endblock student-info %}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</html>
