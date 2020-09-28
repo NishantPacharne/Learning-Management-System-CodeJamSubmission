@@ -83,3 +83,6 @@ def teacher_register(request):
         context = {'form': form}
         return render(request, 'users/t_register.html', context)
 
+def reset_password(request):
+    return HttpResponse("It is Working")
+

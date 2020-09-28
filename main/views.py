@@ -117,3 +117,4 @@ def view_students(request, rollno):
     student = Student.objects.get(rollno=rollno)
     context = {'student': student}
     return render(request, 'main/view_student.html', context)
+
