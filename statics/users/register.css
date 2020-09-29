@@ -77,11 +77,20 @@ body {
     list-style-type: none;
 }
 
+.errorlist li {
+  color: red;
+}
+
 .form-messages {
   text-align: center;
   border: 1px solid red;
   margin: 10px 0px;
   color: red;
+}
+
+.invalid-feedback {
+  color: red;
+  text-align: center;
 }
 
 
