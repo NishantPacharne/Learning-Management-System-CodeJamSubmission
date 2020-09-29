@@ -20,4 +20,11 @@ class Teacher(models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
+class UserOtp(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    time_st = models.DateTimeField(auto_now=True, null=True)
+    otp = models.IntegerField(null=True)
+    def __str__(self):
+        return str(self.user)
+
 

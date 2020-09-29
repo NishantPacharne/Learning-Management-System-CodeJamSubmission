@@ -1,0 +1,16 @@
+{% extends 'users/base_reg.html' %}
+
+{% block content %}
+
+<form action="{% url 'registration_pg' %}" method="post">
+    {% csrf_token %}
+    <input class="form-control"type="number"name="otp" id="otp" placeholder="Enter Your 6-digit OTP">
+    <input type="hidden" name="usr" value="{{usr}}">
+    {% if text %}
+        <div class="alert alert-danger" role="alert">
+            {{text}}
+        </div>
+    {% endif %}
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+{% endblock %}
