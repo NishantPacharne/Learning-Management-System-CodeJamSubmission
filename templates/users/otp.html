@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url 'registration_pg' %}" method="post">
+<form action="{% url 'login_pg' %}" method="post">
     {% csrf_token %}
     <input class="form-control"type="number"name="otp" id="otp" placeholder="Enter Your 6-digit OTP">
     <input type="hidden" name="usr" value="{{usr}}">
