@@ -38,16 +38,6 @@ def user_login(request):
                 return render(request, 'users/login.html')
             elif not User.objects.get(username=username).is_active:
                 usr = User.objects.get(username=username)
-                # usr_otp = random.randint(100000, 999999)
-                # UserOtp.objects.create(user=usr, otp=usr_otp).save()
-                # e_meesage = f"Hi {usr.first_name} This is Nishant From NCONNECT, \n Your OTP is {usr_otp}\n Thank You Have a Nice Day ahead !"
-                # send_mail(
-                #     "Welcome To N-CONNECT , Verification Email",
-                #     e_meesage,
-                #     settings.EMAIL_HOST_USER,
-                #     [usr.email],
-                #     fail_silently=False
-                # )
                 context = {'title': "Enter Your OTP", 'usr': usr}
                 return render(request, 'users/otp.html', context)
             else:
@@ -65,18 +55,6 @@ def student_register(request):
     else:
         form = StudentCreationForm()
         if request.method == "POST":
-            # recieved_otp = request.POST.get('otp')
-            # if recieved_otp:
-            #     otp_usr = request.POST.get('usr')
-            #     usr = User.objects.get(username=otp_usr)
-            #     if int(recieved_otp) == UserOtp.objects.filter(user=usr).last().otp:
-            #         usr.is_active = True
-            #         usr.save()
-            #         login(request, usr)
-            #         return redirect('dashboard_pg')
-            #     else:
-            #         return render(request, 'users/otp.html', {'title': 'Enter OTP', 'text':'You have entered a wrong OTP', 'usr': usr})
-            # else:
             form = StudentCreationForm(request.POST)
             if form.is_valid():
                 user = request.POST['username']
@@ -111,8 +89,6 @@ def student_register(request):
                             [usr.email],
                             fail_silently=False
                         )
-                        # context = {'title': "Enter Your OTP", 'usr': usr}
-                        # return render(request, 'users/otp.html', context)
                         messages.success(request, f'Account for {user} has been created succesfully')
                         return redirect('login_pg')
     context = {'form': form}
@@ -134,19 +110,20 @@ def teacher_register(request):
                     group = Group.objects.get(name='Teachers')
                     usr.groups.add(group)
                     usr.is_active = False
+                    usr.save()
                     # otp management
                     usr_otp = random.randint(100000, 999999)
                     UserOtp.objects.create(user=usr, otp=usr_otp)
-                    e_meesage = f"Hi {{usr_obj.first_name}} This is Nishant From NCONNECT, \n Your OTP is {{usr_otp}}\n Thank You Have a Nice Day ahead !"
+                    e_meesage = f"Hi {usr.first_name} This is Nishant From NCONNECT, \n Your OTP is {usr_otp}\n Thank You Have a Nice Day ahead !"
                     send_mail(
                         "Welcome To N-CONNECT , Verification Email",
                         e_meesage,
                         settings.EMAIL_HOST_USER,
-                        usr.email,
+                        [usr.email],
                         fail_silently=False
                     )
-                    context = {}
-                    return render(request, 'users/otp.html')
+                    messages.success(request, f'Account for {usr.first_name} {usr.last_name} has been created succesfully')
+                    return redirect('login_pg')
             else:
                 form = TeacherCreatinForm(request.POST)
                 messages.info(request, 'Wrong verification code, please try again!')
