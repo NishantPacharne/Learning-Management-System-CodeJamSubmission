@@ -89,7 +89,7 @@ def student_register(request):
                             [usr.email],
                             fail_silently=False
                         )
-                        messages.success(request, f'Account for {user} has been created succesfully')
+                        messages.success(request, f'Account for {user} has been created succesfully !')
                         return redirect('login_pg')
     context = {'form': form}
     return render(request, 'users/register.html', context)
@@ -122,7 +122,7 @@ def teacher_register(request):
                         [usr.email],
                         fail_silently=False
                     )
-                    messages.success(request, f'Account for {usr.first_name} {usr.last_name} has been created succesfully')
+                    messages.success(request, f'Account for {usr.first_name} {usr.last_name} has been created succesfully !')
                     return redirect('login_pg')
             else:
                 form = TeacherCreatinForm(request.POST)
