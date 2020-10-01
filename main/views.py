@@ -8,7 +8,7 @@ from .decorators import allowed_users
 from .forms import *
 
 
-
+#meeting operation views for teachers
 
 @login_required(login_url='login_pg')
 def dashboard(request):
@@ -53,13 +53,7 @@ def all_meets(request, std):
     context = {'meetings': meetings, 'std': std}
     return render(request, 'main/lst_meetings.html', context)
 
-@allowed_users(allowed_roles=['Teachers'])
-def all_stu(request, std):
-    students_a = Student.objects.filter(std=std, div="A")
-    students_b = Student.objects.filter(std=std, div="B")
-    context = {'students_a': students_a, 'students_b': students_b, 'std': std}
-    return render(request, 'main/lst_students.html', context)
-
+# views for particular teacher to view their meetings
 @allowed_users(allowed_roles=['Teachers'])
 def my_today_meets(request):
     meetings = Meeting.objects.filter(subject__teacher=request.user.id, date=date.today())
@@ -72,6 +66,7 @@ def my_all_meets(request):
     context = {'meetings': meetings}
     return render(request, 'main/lst_meetings.html', context)
 
+# meeting crud views
 @allowed_users(allowed_roles=['Teachers'])
 def crt_meeting(request):
     form = MeetingCreationForm
@@ -112,9 +107,19 @@ def con_meeting(request, id):
         meeting.save()
     return redirect("dashboard_pg")
 
+# student management views
+
+@allowed_users(allowed_roles=['Teachers'])
+def all_stu(request, std):
+    students_a = Student.objects.filter(std=std, div="A")
+    students_b = Student.objects.filter(std=std, div="B")
+    context = {'students_a': students_a, 'students_b': students_b, 'std': std}
+    return render(request, 'main/lst_students.html', context)
+
 @allowed_users(allowed_roles=['Teachers'])
 def view_students(request, rollno):
     student = Student.objects.get(rollno=rollno)
-    context = {'student': student}
+    std = student.std
+    context = {'student': student, 'std': std}
     return render(request, 'main/view_student.html', context)
 
