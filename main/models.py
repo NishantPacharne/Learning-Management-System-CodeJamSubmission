@@ -12,7 +12,7 @@ class Subject(models.Model):
 class Meeting(models.Model):
     topic = models.CharField(max_length=200, null=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, null=True)
-    date = models.DateField(default=date.today, null=True)
+    date = models.DateField(auto_now_add=True, auto_now=False, null=True)
     STATUS = (
         ('Incomplete', 'Incomplete'),
         ('Concluded', 'Concluded'),

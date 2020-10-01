@@ -4,7 +4,11 @@
 
 {% block student-creation-form %}
 <section id="meeting-creation">
+    {% if edit %}
+    <form action="" method="post">
+    {% else %}
     <form action="{% url 'crt_meeting_pg' %}" method="post">
+    {% endif %}
         {% csrf_token %}
         {{form|crispy}}
         <button type="submit" class="btn btn-primary">Submit</button>

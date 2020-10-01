@@ -48,6 +48,7 @@
             <a class="btn btn-success" href="{% url 'conclude_meeting_pg' meeting.id %}"><i class="fa fa-check"></i>
                 <span>Conclude</span></a>
             {% endif %}
+            <a class="btn btn-primary"href="{% url 'edit_meeting_pg' meeting.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>Edit</span></a>
             {% if meeting.status == "Deleted" %}
             <a class="btn btn-danger" href="{% url 'restore_meeting_pg' meeting.id %}"><i class="fa fa-repeat"></i>
                 <span>Restore</span></a>

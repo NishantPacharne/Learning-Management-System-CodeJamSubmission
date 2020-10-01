@@ -69,18 +69,26 @@ def my_all_meets(request):
 # meeting crud views
 @allowed_users(allowed_roles=['Teachers'])
 def crt_meeting(request):
-    form = MeetingCreationForm
+    form = MeetingCreationForm()
     if request.method == "POST":
         form = MeetingCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('dashboard_pg')
-        else:
-            return HttpResponse("Something went wrong please try again")
-
     context = {'form': form}
     return render(request, 'main/crt_meeting.html', context)
 
+@allowed_users(allowed_roles=['Teachers'])
+def edit_meeting(request, pk):
+    meeting = Meeting.objects.get(id=pk)
+    form = MeetingCreationForm(instance=meeting)
+    if request.method == 'POST':
+        form = MeetingCreationForm(request.POST, instance=meeting)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard_pg')
+    context = {'form': form, 'edit': True}
+    return render(request, 'main/crt_meeting.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def del_meeting(request, id):

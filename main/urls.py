@@ -19,6 +19,7 @@ urlpatterns = [
     # meetings crud urls
 
     path("crt-meeting", views.crt_meeting, name="crt_meeting_pg"),
+    path("edit-meeting/<str:pk>/", views.edit_meeting, name="edit_meeting_pg"),
     path("del-meeting/<str:id>/", views.del_meeting, name="del_meeting_pg"),
     path("restore-meeting/<str:id>/", views.rest_meeting, name="restore_meeting_pg"),
     path("conclude-meeting/<str:id>/", views.con_meeting, name="conclude_meeting_pg"),
