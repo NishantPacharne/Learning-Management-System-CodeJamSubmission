@@ -68,6 +68,7 @@ nav ul li a:hover {
     line-height: 60px;
     transition: 0.5s;
     color: #ffffff;
+    border-left: 0px solid;
 }
 
 .side-menu .log-out {
@@ -80,7 +81,7 @@ nav ul li a:hover {
 }
 
 .side-menu .active {
-    border-left: 2px solid #0758ff;
+    border-left: 4px solid #0758ff;
     background: #101010;
 }
 
@@ -149,6 +150,11 @@ nav ul li a:hover {
 
 .sub-nav ul li :hover::after {
     width: 100%;
+}
+
+.sub-active{
+    border-bottom: 3px solid #0078ff;
+    padding-bottom: 3.3px;
 }
 
 #meetings-container {

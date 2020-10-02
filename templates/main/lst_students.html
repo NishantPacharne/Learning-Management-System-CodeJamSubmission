@@ -5,7 +5,7 @@
 <li><a href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
 <li><a href="{% url 'meetings_today' std %}">Today</a></li>
 <li><a href="{% url 'meetings_all' std %}">All</a></li>
-<li><a href="{% url 'stu_all' std %}">Students</a></li>
+<li><a class="sub-nav-links {% if request.path == '/students/9/' %} sub-active {% endif %}{% if request.path == '/students/8/' %} sub-active {% endif %}{% if request.path == '/students/10/' %} sub-active {% endif %}" href="{% url 'stu_all' std %}">Students</a></li>
 
 {% endblock sub-nav-block %}
 

@@ -1,20 +1,21 @@
 {% extends 'main/teacher_dash.html' %}
+{% load active_link_tags %}
 
 
 {% block sub-nav-block %}
 
 {% if std %}
 
-<li><a href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
-<li><a href="{% url 'meetings_today' std %}">Today</a></li>
-<li><a href="{% url 'meetings_all' std %}">All</a></li>
-<li><a href="{% url 'stu_all' std %}">Students</a></li>
+<li><a class="sub-nav-links" href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
+<li><a class="sub-nav-links" href="{% url 'meetings_today' std %}">Today</a></li>
+<li><a class="sub-nav-links" href="{% url 'meetings_all' std %}">All</a></li>
+<li><a class="sub-nav-links {% if request.path == '/students/9/' %} sub-active {% endif %}{% if request.path == '/students/8/' %} sub-active {% endif %}{% if request.path == '/students/10/' %} sub-active {% endif %}" href="{% url 'stu_all' std %}">Students</a></li>
 
 {% else %}
 
-<li><a href="{% url 'dashboard_pg' %}">Upcoming</a></li>
-<li><a href="{% url 'mtoday_meets' %}">Today</a></li>
-<li><a href="{% url 'mall_meets' %}">All</a></li>
+<li><a href="{% url 'dashboard_pg' %}"class="{% if request.path == '/' %} sub-active {% endif %}">Upcoming</a></li>
+<li><a href="{% url 'mtoday_meets' %}"class="{% active_link 'mtoday_meets' 'sub-active' %}">Today</a></li>
+<li><a href="{% url 'mall_meets' %}"class="{% active_link 'mall_meets' 'sub-active' %}">All</a></li>
 
 {% endif %}
 

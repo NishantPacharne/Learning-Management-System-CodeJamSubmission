@@ -70,6 +70,27 @@
 
 
     {% endblock student-info %}
+    <script>
+        const currentLocation = location.href;
+        const menuItem = document.querySelectorAll('.side-menu-links');
+        const menuLength = menuItem.length
+        for(let i = 0; i<menuLength; i++){
+            if(menuItem[i].href === currentLocation){
+                menuItem[i].className = "active"
+            }
+        }
+
+        const currentLocation2 = location.href;
+        const menuItem2 = document.querySelectorAll('.sub-nav-links');
+        const menuLength2 = menuItem.length
+        for(let i = 0; i<menuLength2; i++){
+            if(menuItem2[i].href === currentLocation2){
+                menuItem2[i].className = "sub-active"
+            }
+        }
+
+
+    </script>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
