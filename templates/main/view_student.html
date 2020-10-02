@@ -13,6 +13,8 @@
 
 {% block student-info %}
 
+{% if student %}
+
 <section id="student-info">
     <div class="row">
         <div class="col-md" style="margin-bottom: 20px;">
@@ -53,6 +55,70 @@
         </tr>
     </table>
 </section>
+
+{% else %}
+
+<section id="student-info">
+    <div class="row">
+        <div class="col-md" style="margin-bottom: 20px;">
+            <div class="card card-body">
+                <h5>Meetings Information</h5>
+                <hr>
+                <p>Topic: {{meeting.topic}}</p>
+                <p>subject: {{meeting.subject}}</p>
+                <p>class: {{meeting.std}}</p>
+                <p>Date: {{meeting.date}}</p>
+                <p>Time: {{meeting.time}}</p>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Meeting participents</h5>
+                <hr>
+                <p>Total participents: </p>   
+            </div>
+        </div>
+    </div>
+</section>
+<section id="student-meetings">
+    <h5>Participents from DIV A: </h5>
+    <table class="table table-sm">
+        <tr>
+            <th>Rollno</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>Nishant</td>
+            <td>Pacharne</td>
+            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+        </tr>
+    </table>
+</section>
+<br>
+<section id="student-meetings">
+    <h5>Participents from DIV B: </h5>
+    <table class="table table-sm">
+        <tr>
+            <th>Rollno</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>22</td>
+            <td>Nishant</td>
+            <td>Pacharne</td>
+            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+        </tr>
+    </table>
+</section>
+
+
+{% endif %}
+
 
 {% endblock student-info %}
 

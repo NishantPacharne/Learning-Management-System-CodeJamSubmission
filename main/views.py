@@ -71,49 +71,61 @@ def my_all_meets(request):
 def crt_meeting(request):
     form = MeetingCreationForm()
     if request.method == "POST":
+        std = request.POST.get('std')
         form = MeetingCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard_pg')
+            return redirect(f'/meetings-class/{std}')
     context = {'form': form}
     return render(request, 'main/crt_meeting.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def edit_meeting(request, pk):
     meeting = Meeting.objects.get(id=pk)
+    std = request.POST.get('std')
     form = MeetingCreationForm(instance=meeting)
     if request.method == 'POST':
         form = MeetingCreationForm(request.POST, instance=meeting)
         if form.is_valid():
             form.save()
-            return redirect('dashboard_pg')
+        return redirect(f'/meetings-class/{std}')
     context = {'form': form, 'edit': True}
     return render(request, 'main/crt_meeting.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def del_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
+    std = meeting.std
     meeting.status = "Deleted"
     meeting.save()
-    return redirect("dashboard_pg")
+    return redirect(f'/meetings-class/{std}')
 
 @allowed_users(allowed_roles=['Teachers'])
 def rest_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
+    std = meeting.std
     meeting.status = "Incomplete"
     meeting.save()
-    return redirect("dashboard_pg")
+    return redirect(f'/meetings-class/{std}')
 
 @allowed_users(allowed_roles=['Teachers'])
 def con_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
+    std = meeting.std
     if meeting.status == "Incomplete":
         meeting.status = "Concluded"
         meeting.save()
     else:
         meeting.status = "Incomplete"
         meeting.save()
-    return redirect("dashboard_pg")
+    return redirect(f'/meetings-class/{std}')
+
+@allowed_users(allowed_roles=['Teachers'])
+def meeting_info(request, id):
+    meeting = Meeting.objects.get(id=id)
+    std = meeting.std
+    context = {'meeting': meeting, 'std': std}
+    return render(request, 'main/view_student.html', context)
 
 # student management views
 
@@ -131,3 +143,11 @@ def view_students(request, rollno):
     context = {'student': student, 'std': std}
     return render(request, 'main/view_student.html', context)
 
+@allowed_users(allowed_roles=['Teachers'])
+def delte_student(request, rollno):
+    student = Student.objects.get(rollno=rollno)
+    std = student.std
+    stu_user = User.objects.get(username=student.user)
+    student.delete()
+    stu_user.delete()
+    return redirect(f'/students/{std}')

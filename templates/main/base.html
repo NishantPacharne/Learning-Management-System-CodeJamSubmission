@@ -36,6 +36,7 @@
             <a href="#"><i class="fa fa-envelope"></i><span>Contact</span></a>
             <a href="#"><i class="fa fa-cog"></i><span>Settings</span></a>
             <a href="{% url 'logout_pg' %}" class="log-out"><i class="fa fa-sign-out"></i><span>Logout</span></a>
+            <div class="animation start-home"></div>
         </div>
         <div class="sub-nav">
             <ul>
@@ -53,22 +54,22 @@
 
         {% endblock meetings %}
     </section>
-        {% block students %}
+    {% block students %}
 
 
 
-        {% endblock students %}
+    {% endblock students %}
 
-        {% block student-creation-form %}
+    {% block student-creation-form %}
 
 
-        {% endblock student-creation-form %}
+    {% endblock student-creation-form %}
 
-        {% block student-info %}
+    {% block student-info %}
 
-        
 
-        {% endblock student-info %}
+
+    {% endblock student-info %}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -80,5 +81,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-
 </html>

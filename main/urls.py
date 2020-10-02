@@ -23,9 +23,11 @@ urlpatterns = [
     path("del-meeting/<str:id>/", views.del_meeting, name="del_meeting_pg"),
     path("restore-meeting/<str:id>/", views.rest_meeting, name="restore_meeting_pg"),
     path("conclude-meeting/<str:id>/", views.con_meeting, name="conclude_meeting_pg"),
+    path("meeting-info/<str:id>/", views.meeting_info, name="meeting_info_pg"),
 
     # students crud url
 
-    path("students/<str:std>", views.all_stu, name="stu_all"),
-    path('view-student/<str:rollno>', views.view_students, name="view_student_pg")
+    path("students/<str:std>/", views.all_stu, name="stu_all"),
+    path('view-student/<str:rollno>/', views.view_students, name="view_student_pg"),
+    path('delte-student/<str:rollno>/', views.delte_student, name="delete_student_pg")
 ]

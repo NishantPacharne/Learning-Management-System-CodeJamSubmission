@@ -79,6 +79,11 @@ nav ul li a:hover {
     padding-left: 20px;
 }
 
+.side-menu .active {
+    border-left: 2px solid #0758ff;
+    background: #101010;
+}
+
 .side-menu span {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
