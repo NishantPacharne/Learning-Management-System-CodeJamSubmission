@@ -18,7 +18,8 @@ def dashboard(request):
     meetings = Meeting.objects.all()
 
     if group in user_grps:
-        meetings = Meeting.objects.filter(subject__teacher=request.user.id, date=date.today(), status="Incomplete")
+        meetings = Meeting.objects.filter(
+            subject__teacher=request.user.id, date=date.today(), status="Incomplete").order_by('-id')
         context = {'meetings': meetings}
         return render(request, 'main/lst_meetings.html', context)
     else:
@@ -26,43 +27,43 @@ def dashboard(request):
         stu_user = Student.objects.get(user=User.objects.get(username=user))
         stu_std = stu_user.std
         if stu_std == 9:
-            stu_meeting = meetings.filter(std=9, status="Incomplete", date=date.today())
+            stu_meeting = meetings.filter(std=9, status="Incomplete", date=date.today()).order_by('-id')
         if stu_std == 8:
-            stu_meeting = meetings.filter(std=8, status="Incomplete", date=date.today())
+            stu_meeting = meetings.filter(std=8, status="Incomplete", date=date.today()).order_by('-id')
         if stu_std == 7:
-            stu_meeting = meetings.filter(std=7, status="Incomplete", date=date.today())
+            stu_meeting = meetings.filter(std=7, status="Incomplete", date=date.today()).order_by('-id')
 
         context = {'meetings': stu_meeting}
         return render(request, 'main/student_dash.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def list_meetings(request, std):
-    meetings = Meeting.objects.filter(std=std, status="Incomplete", date=date.today())
+    meetings = Meeting.objects.filter(std=std, status="Incomplete", date=date.today()).order_by('-id')
     context = {'meetings': meetings, 'std': std}
     return render(request, 'main/lst_meetings.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def today_meets(request, std):
-    meetings = Meeting.objects.filter(std=std, date=date.today())
+    meetings = Meeting.objects.filter(std=std, date=date.today()).order_by('-id')
     context = {'meetings': meetings, 'std':std}
     return render(request, 'main/lst_meetings.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def all_meets(request, std):
-    meetings = Meeting.objects.filter(std=std)
+    meetings = Meeting.objects.filter(std=std).order_by('-id')
     context = {'meetings': meetings, 'std': std}
     return render(request, 'main/lst_meetings.html', context)
 
 # views for particular teacher to view their meetings
 @allowed_users(allowed_roles=['Teachers'])
 def my_today_meets(request):
-    meetings = Meeting.objects.filter(subject__teacher=request.user.id, date=date.today())
+    meetings = Meeting.objects.filter(subject__teacher=request.user.id, date=date.today()).order_by('-id')
     context = {'meetings': meetings}
     return render(request, 'main/lst_meetings.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
 def my_all_meets(request):
-    meetings = Meeting.objects.filter(subject__teacher=request.user.id)
+    meetings = Meeting.objects.filter(subject__teacher=request.user.id).order_by('-id')
     context = {'meetings': meetings}
     return render(request, 'main/lst_meetings.html', context)
 
@@ -129,7 +130,10 @@ def meeting_info(request, id):
     participents_b = participents.filter(div="B")
     std = meeting.std
     total_students = Student.objects.filter(std=std).count()
-    o_attendance = total_students/participents_count*100
+    try:
+        o_attendance = participents_count/total_students*100
+    except:
+        o_attendance = 0
     context = {'meeting': meeting, 'std': std, 'participents_a': participents_a, 'participents_b': participents_b,
                'participents_count': participents_count, 'total_students': total_students, 'o_attendance': o_attendance}
     return render(request, 'main/view_student.html', context)
@@ -138,8 +142,8 @@ def meeting_info(request, id):
 
 @allowed_users(allowed_roles=['Teachers'])
 def all_stu(request, std):
-    students_a = Student.objects.filter(std=std, div="A")
-    students_b = Student.objects.filter(std=std, div="B")
+    students_a = Student.objects.filter(std=std, div="A").order_by('rollno')
+    students_b = Student.objects.filter(std=std, div="B").order_by('rollno')
     context = {'students_a': students_a, 'students_b': students_b, 'std': std}
     return render(request, 'main/lst_students.html', context)
 
@@ -172,7 +176,7 @@ def delte_student(request, rollno):
 def student_today_meets(request):
     student = Student.objects.get(user=request.user)
     std = student.std
-    meetings = Meeting.objects.filter(std=std, date=date.today())
+    meetings = Meeting.objects.filter(std=std, date=date.today()).order_by('-id')
     context = {'meetings': meetings}
     return render(request, 'main/student_dash.html', context)
 
@@ -180,7 +184,7 @@ def student_today_meets(request):
 def student_all_meets(request):
     student = Student.objects.get(user=request.user)
     std = student.std
-    meetings = Meeting.objects.filter(std=std)
+    meetings = Meeting.objects.filter(std=std).order_by('-id')
     context = {'meetings': meetings}
     return render(request, 'main/student_dash.html', context)
 

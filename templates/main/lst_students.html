@@ -18,7 +18,6 @@
         <tr>
             <th>Roll no</th>
             <th class="student-name" >Name</th>
-            <th class="meets-attended">Meetings attended</th>
             <th></th>
             <th></th>
             <th></th>
@@ -27,7 +26,6 @@
         <tr>
             <td>{{student.rollno}}</td>
             <td class="student-name" >{{student.user.first_name}} {{student.father_name}} {{student.user.last_name}}</td>
-            <td class="meets-attended">24</td>
             <td><a href="{% url 'view_student_pg' student.rollno %}"class="btn btn-primary"><i class="fa fa-graduation-cap"></i><span> View</span></a></td>
             <td><a href="{% url 'delete_student_pg' student.rollno %}"class="btn btn-danger"><i class="fa fa-trash"></i> <span>Delete</span></a></td>
         </tr>
@@ -39,7 +37,6 @@
         <tr>
             <th>Roll no</th>
             <th class="student-name" >Name</th>
-            <th class="meets-attended">Meetings attended</th>
             <th></th>
             <th></th>
             <th></th>
@@ -48,7 +45,6 @@
         <tr>
             <td>{{student.rollno}}</td>
             <td class="student-name" >{{student.user.first_name}} {{student.father_name}} {{student.user.last_name}}</td>
-            <td class="meets-attended">24</td>
             <td><a href="{% url 'view_student_pg' student.rollno %}"class="btn btn-primary"><i class="fa fa-graduation-cap"></i><span> View</span></a></td>
             <td><a href="{% url 'delete_student_pg' student.rollno %}"class="btn btn-danger"><i class="fa fa-trash"></i> <span>Delete</span></a></td>
         </tr>
