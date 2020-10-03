@@ -27,7 +27,7 @@
                 <div id="form-login-section" class="form-group">
                     <input id="passwd" class="form-control" name="password" type="password" size="18"
                         placeholder="password" required>
-                    <a href="#" style="float: right; margin-bottom: 8px;">Forgot Password ?</a>
+                    <a href="{% url 'reset_password' %}" style="float: right; margin-bottom: 8px;">Forgot Password ?</a>
                 </div>
                 {% if messages %}
                 <div class="form-messages">
