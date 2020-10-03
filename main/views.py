@@ -171,4 +171,18 @@ def student_all_meets(request):
     context = {'meetings': meetings}
     return render(request, 'main/student_dash.html', context)
 
+#  marking attendance views
+
+@allowed_users(allowed_roles=['Students'])
+def mark_attendance(request, id):
+    meeting = Meeting.objects.get(id=id)
+    student = Student.objects.get(user=request.user)
+    participents = [meeting.participents]
+    if student in participents:
+        return HttpResponse("You'r attendance is already registered")
+    else:
+        meeting.participents.add(student)
+        meeting.save()
+        return redirect("dashboard_pg")
+
 

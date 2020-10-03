@@ -29,7 +29,8 @@
         <h5>link: {{meeting.link}}</h5>
         <h5>Status: {{meeting.status}}</h5>
     {% if meeting.status == "Incomplete" %}    
-    <form class="attendance-form">
+    <form action="{% url 'mark_attendance_pg' meeting.id %}"method="POST"class="attendance-form">
+        {% csrf_token %}
         <input class="attendance-radio-button" name="attendance" id="btn-1"type="radio" value="P">
         <label class="p-label" for="btn-1">P</label>
         <button type ="submit"><i class="fa fa-check"></i></button>

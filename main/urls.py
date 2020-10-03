@@ -34,9 +34,11 @@ urlpatterns = [
     # student dash operation url
 
     path("student-today-meets/", views.student_today_meets, name="student_today_meets_pg"),
-    path("student-all-meets/", views.student_all_meets, name="student_all_meets_pg")
+    path("student-all-meets/", views.student_all_meets, name="student_all_meets_pg"),
 
     # marking attendance urls
+
+    path("mark-attendance/<str:id>/", views.mark_attendance, name="mark_attendance_pg" )
 
 
 ]
