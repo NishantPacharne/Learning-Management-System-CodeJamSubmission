@@ -72,8 +72,8 @@
         const currentLocation = location.href;
         const menuItem = document.querySelectorAll('.side-menu-links');
         const menuLength = menuItem.length
-        for(let i = 0; i<menuLength; i++){
-            if(menuItem[i].href === currentLocation){
+        for (let i = 0; i < menuLength; i++) {
+            if (menuItem[i].href === currentLocation) {
                 menuItem[i].className = "active"
             }
         }
@@ -81,8 +81,8 @@
         const currentLocation2 = location.href;
         const menuItem2 = document.querySelectorAll('.sub-nav-links');
         const menuLength2 = menuItem.length
-        for(let i = 0; i<menuLength2; i++){
-            if(menuItem2[i].href === currentLocation2){
+        for (let i = 0; i < menuLength2; i++) {
+            if (menuItem2[i].href === currentLocation2) {
                 menuItem2[i].className = "sub-active"
             }
         }
@@ -94,10 +94,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+    integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
 </html>

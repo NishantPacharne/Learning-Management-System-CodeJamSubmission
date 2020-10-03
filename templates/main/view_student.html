@@ -30,14 +30,40 @@
                 <p>Std: {{student.std}}</p>
                 <p>Div: {{student.div}}</p>
                 <p>Roll no: {{student.rollno}}</p>
+                <p>Overall attendance: {{over_all_attendance}}%</p>
             </div>
         </div>
         <div class="col-md">
             <div class="card card-body">
                 <h5>Meetings info</h5>
                 <hr>
-                <p>Total Meetings attended: </p>
-                
+                <p>Total Meetings attended: {{meeting_count}}</p>
+                <canvas id="pie-chart"></canvas>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+            <script>
+                var config = {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [{{meeting_count}}, {{a_meet_c}}],
+                            backgroundColor: [
+                                '#ff0000', '#0000ff'],
+                            label: 'Meeting participants'
+                        }],
+                        labels: ['Meetings attended', 'Total Meetings']
+                    },
+                    options: {
+                        responsive: true
+                    }
+                };
+
+                window.onload = function () {
+                    var ctx = document.getElementById('pie-chart').getContext('2d');
+                    window.myPie = new Chart(ctx, config);
+                };
+            </script>
+
             </div>
         </div>
     </div>
@@ -51,12 +77,15 @@
             <th>Date</th>
             <th></th>
         </tr>
+        {% for meeting in meetings_attended %}
         <tr>
-            <td>Python</td>
-            <td>Computer</td>
-            <td>12/3/20</td>
-            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+            <td>{{meeting.topic}}</td>
+            <td>{{meeting.subject}}</td>
+            <td>{{meeting.date}}</td>
+            <td><a href="{% url 'meeting_info_pg' meeting.id %}" class="btn btn-primary btn-sm"><i
+                        class="fa fa-eye"></i> <span>View</span></a></td>
         </tr>
+        {% endfor %}
     </table>
 </section>
 
@@ -73,15 +102,42 @@
                 <p>class: {{meeting.std}}</p>
                 <p>Date: {{meeting.date}}</p>
                 <p>Time: {{meeting.time}}</p>
+                <p>Overall Presenty: {{o_attendance}}</p>
             </div>
         </div>
         <div class="col-md">
             <div class="card card-body">
-                <h5>Meeting participents</h5>
+                <h5>Meeting participants</h5>
                 <hr>
-                <p>Total participents: </p>   
+                <p>Total participants: {{participents_count}}</p>
+                <canvas id="pie-chart"></canvas>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+            <script>
+                var config = {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [{{participents_count}}, {{total_students}}],
+                            backgroundColor: [
+                                '#ff0000', '#0000ff'],
+                            label: 'Meeting participants'
+                        }],
+                        labels: ['Total students', 'Total Participants']
+                    },
+                    options: {
+                        responsive: true
+                    }
+                };
+
+                window.onload = function () {
+                    var ctx = document.getElementById('pie-chart').getContext('2d');
+                    window.myPie = new Chart(ctx, config);
+                };
+            </script>
+            </canvas>
         </div>
+    </div>
     </div>
 </section>
 <section id="student-meetings">
@@ -93,12 +149,15 @@
             <th>Last Name</th>
             <th></th>
         </tr>
+        {% for particepent in participents_a %}
         <tr>
-            <td>22</td>
-            <td>Nishant</td>
-            <td>Pacharne</td>
-            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+            <td>{{particepent.rollno}}</td>
+            <td>{{particepent.user.first_name}}</td>
+            <td>{{particepent.user.last_name}}</td>
+            <td><a href="{% url 'view_student_pg' particepent.rollno %}" class="btn btn-primary btn-sm"><i
+                        class="fa fa-eye"></i> <span>View</span></a></td>
         </tr>
+        {% endfor %}
     </table>
 </section>
 <br>
@@ -111,12 +170,15 @@
             <th>Last Name</th>
             <th></th>
         </tr>
+        {% for particepent in participents_b %}
         <tr>
-            <td>22</td>
-            <td>Nishant</td>
-            <td>Pacharne</td>
-            <td><a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i> <span>View</span></a></td>
+            <td>{{particepent.rollno}}</td>
+            <td>{{particepent.user.first_name}}</td>
+            <td>{{particepent.user.last_name}}</td>
+            <td><a href="{% url 'view_student_pg' particepent.rollno %}" class="btn btn-primary btn-sm"><i
+                        class="fa fa-eye"></i> <span>View</span></a></td>
         </tr>
+        {% endfor %}
     </table>
 </section>
 

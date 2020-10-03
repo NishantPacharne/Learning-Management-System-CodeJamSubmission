@@ -123,8 +123,15 @@ def con_meeting(request, id):
 @allowed_users(allowed_roles=['Teachers'])
 def meeting_info(request, id):
     meeting = Meeting.objects.get(id=id)
+    participents = meeting.participents.all()
+    participents_count = meeting.participents.count()
+    participents_a = participents.filter(div="A")
+    participents_b = participents.filter(div="B")
     std = meeting.std
-    context = {'meeting': meeting, 'std': std}
+    total_students = Student.objects.filter(std=std).count()
+    o_attendance = total_students/participents_count*100
+    context = {'meeting': meeting, 'std': std, 'participents_a': participents_a, 'participents_b': participents_b,
+               'participents_count': participents_count, 'total_students': total_students, 'o_attendance': o_attendance}
     return render(request, 'main/view_student.html', context)
 
 # student management views
@@ -140,7 +147,13 @@ def all_stu(request, std):
 def view_students(request, rollno):
     student = Student.objects.get(rollno=rollno)
     std = student.std
-    context = {'student': student, 'std': std}
+    # meeting_p = Meeting.participents.all()
+    meeting_a = Meeting.objects.filter(participents=student)
+    meetings_count = meeting_a.count()
+    a_meet_c = Meeting.objects.filter(std=std).count()
+    over_all_attendance = meetings_count/a_meet_c*100
+    context = {'student': student, 'std': std, 'meetings_attended': meeting_a, 'meeting_count': meetings_count,
+               'a_meet_c': a_meet_c, 'over_all_attendance': over_all_attendance}
     return render(request, 'main/view_student.html', context)
 
 @allowed_users(allowed_roles=['Teachers'])
@@ -178,11 +191,8 @@ def mark_attendance(request, id):
     meeting = Meeting.objects.get(id=id)
     student = Student.objects.get(user=request.user)
     participents = [meeting.participents]
-    if student in participents:
-        return HttpResponse("You'r attendance is already registered")
-    else:
-        meeting.participents.add(student)
-        meeting.save()
-        return redirect("dashboard_pg")
+    meeting.participents.add(student)
+    meeting.save()
+    return redirect("dashboard_pg")
 
 
