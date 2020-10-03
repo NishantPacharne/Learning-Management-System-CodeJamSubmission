@@ -68,7 +68,7 @@ nav ul li a:hover {
     line-height: 60px;
     transition: 0.5s;
     color: #ffffff;
-    border-left: 0px solid;
+    border-left: 0px solid #0758ff;
 }
 
 .side-menu .log-out {

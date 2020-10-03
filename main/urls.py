@@ -29,5 +29,14 @@ urlpatterns = [
 
     path("students/<str:std>/", views.all_stu, name="stu_all"),
     path('view-student/<str:rollno>/', views.view_students, name="view_student_pg"),
-    path('delte-student/<str:rollno>/', views.delte_student, name="delete_student_pg")
+    path('delte-student/<str:rollno>/', views.delte_student, name="delete_student_pg"),
+
+    # student dash operation url
+
+    path("student-today-meets/", views.student_today_meets, name="student_today_meets_pg"),
+    path("student-all-meets/", views.student_all_meets, name="student_all_meets_pg")
+
+    # marking attendance urls
+
+
 ]

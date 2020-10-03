@@ -1,11 +1,12 @@
 {% extends 'main/base.html' %}
+{% load active_link_tags %}
 
 
 {% block sub-nav-block %}
 
-<li><a href="#">Upcoming</a></li>
-<li><a href="#">Today</a></li>
-<li><a href="#">All</a></li>
+<li><a class="sub-nav-links {% if request.path == '/' %} sub-active {% endif %}" href="{% url 'dashboard_pg' %}">Upcoming</a></li>
+<li><a class="sub-nav-links {% active_link 'student_today_meets_pg' 'sub-active' %}" href="{% url 'student_today_meets_pg' %}">Today</a></li>
+<li><a class="sub-nav-links {% active_link 'student_all_meets_pg' 'sub-active' %}" href="{% url 'student_all_meets_pg' %}">All</a></li>
 
 {% endblock sub-nav-block %}
 
@@ -13,7 +14,7 @@
 
 {% block side-menu-block %}
 
-<a href="{% url 'dashboard_pg' %}"><i class="fa fa-video-camera"></i><span>Meetings</span></a>
+<a class="side-menu-links {% if request.path == '/student-today-meets/' %}active {% endif %}{% if request.path == '/student-all-meets/' %}active{% endif %}"href="{% url 'dashboard_pg' %}"><i class="fa fa-video-camera"></i><span>Meetings</span></a>
 
 {% endblock side-menu-block %}
 
@@ -27,13 +28,13 @@
         <h5>Time: {{meeting.time}}</h5>
         <h5>link: {{meeting.link}}</h5>
         <h5>Status: {{meeting.status}}</h5>
+    {% if meeting.status == "Incomplete" %}    
     <form class="attendance-form">
         <input class="attendance-radio-button" name="attendance" id="btn-1"type="radio" value="P">
         <label class="p-label" for="btn-1">P</label>
-        <input class="attendance-radio-button" name="attendance" id="btn-2"type="radio" value="A">
-        <label for="btn-2">A</label>
         <button type ="submit"><i class="fa fa-check"></i></button>
     </form>
+    {% endif %}
 </div>
 
 {% endfor %}

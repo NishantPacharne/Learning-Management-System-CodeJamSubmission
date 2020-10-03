@@ -151,3 +151,24 @@ def delte_student(request, rollno):
     student.delete()
     stu_user.delete()
     return redirect(f'/students/{std}')
+
+
+ # student dash operation views
+
+@allowed_users(allowed_roles=['Students'])
+def student_today_meets(request):
+    student = Student.objects.get(user=request.user)
+    std = student.std
+    meetings = Meeting.objects.filter(std=std, date=date.today())
+    context = {'meetings': meetings}
+    return render(request, 'main/student_dash.html', context)
+
+@allowed_users(allowed_roles=['Students'])
+def student_all_meets(request):
+    student = Student.objects.get(user=request.user)
+    std = student.std
+    meetings = Meeting.objects.filter(std=std)
+    context = {'meetings': meetings}
+    return render(request, 'main/student_dash.html', context)
+
+

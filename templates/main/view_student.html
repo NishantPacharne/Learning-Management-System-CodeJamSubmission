@@ -5,7 +5,11 @@
 <li><a href="{% url 'list_meetings_pg' std %}">Upcoming</a></li>
 <li><a href="{% url 'meetings_today' std %}">Today</a></li>
 <li><a href="{% url 'meetings_all' std %}">All</a></li>
+{% if student %}
 <li><a class="sub-active" href="{% url 'stu_all' std %}">Students</a></li>
+{% else %}
+<li><a href="{% url 'stu_all' std %}">Students</a></li>
+{% endif %}
 
 {% endblock sub-nav-block %}
 
