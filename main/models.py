@@ -32,4 +32,25 @@ class Meeting(models.Model):
     def __str__(self):
         return self.topic
 
+# q n a section models
+
+
+class Question(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    text = models.TextField(null=True)
+    image = models.ImageField(null=True, blank=True)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, null=True)
+    STATUS = (
+        ('Unanswered', 'Unanswered'),
+        ('Answered', 'Answered')
+    )
+    status = models.TextField(default='Unanswered', choices=STATUS, null=True)
+    datetime = models.DateTimeField(auto_now_add=True, null=True)
+    std = models.IntegerField(null=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.title
+
+
 

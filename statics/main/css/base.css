@@ -251,6 +251,10 @@ nav ul li a:hover {
     padding: 20px;
 }
 
+.question-title {
+    font-size: 30px;
+}
+
 
 
 
@@ -310,6 +314,15 @@ nav ul li a:hover {
 @media(max-width: 695px){
     #students-container table tr td button span{
         display: none;
+    }
+}
+
+@media(max-width: 615px){
+    .question-title {
+        font-size: 20px;
+    }
+    .question-description {
+        font-size: 15px;
     }
 }
 

@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -38,7 +40,15 @@ urlpatterns = [
 
     # marking attendance urls
 
-    path("mark-attendance/<str:id>/", views.mark_attendance, name="mark_attendance_pg" )
+    path("mark-attendance/<str:id>/", views.mark_attendance, name="mark_attendance_pg"),
 
+    # forum urls
+
+    path("forum/", views.forum_default, name="forum_default_pg"),
+    path('question/<str:id>/', views.question_answer, name="question_view_pg")
 
 ]
+
+# media urls
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

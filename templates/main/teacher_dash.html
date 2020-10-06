@@ -20,6 +20,8 @@
 <a class="side-menu-links {% if request.path == '/today/8/' %} active {% endif %} {% if request.path == '/all/8/' %}active{% endif %}{% if request.path == '/students/8/' %}active{% endif %}" href="{% url 'list_meetings_pg' 8 %}"><i> 8</i><span>8th</span></a>
 <a class="side-menu-links {% if request.path == '/today/9/' %} active {% endif %} {% if request.path == '/all/9/' %}active{% endif %}{% if request.path == '/students/9/' %}active{% endif %}" href="{% url 'list_meetings_pg' 9 %}"><i> 9</i><span>9th</span></a>
 <a class="side-menu-links {% if request.path == '/today/10/' %} active {% endif %} {% if request.path == '/all/10/' %}active{% endif %}{% if request.path == '/students/10/' %}active{% endif %}" href="{% url 'list_meetings_pg' 10 %}"><i>10</i><span>10th</span></a>
+<a class="side-menu-links {% if request.path == '/forum/' %} active {% endif %} {% if request.path == '/forum/' %}active{% endif %}{% if request.path == '/forum/' %}active{% endif %}" href="{% url 'forum_default_pg' %}"><i class="fa fa-quora"></i><span>Questions</span></a>
+
 
 {% endblock side-menu-block %}
 

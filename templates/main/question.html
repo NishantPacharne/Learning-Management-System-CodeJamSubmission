@@ -1,0 +1,23 @@
+{% extends 'main/teacher_dash.html' %}
+
+
+{% block meetings %}
+
+<div class="meeting">
+    <p class="question-title">{{question.title}}</h1>
+    <hr>
+    <h5 class="question-description">{{question.text}}</h5>
+    {% if question.image.url %}
+    <hr>
+        <p>Image:</p>
+        <img class="img-fluid"src="{{question.image.url}}">
+    {% endif %}
+    <hr>
+    <p>asked by: {{question.student.user.first_name}} {{question.student.user.last_name}}</p>
+</div>
+
+{% endblock meetings %}
+
+{% block add-meeting %}
+
+{% endblock add-meeting %}

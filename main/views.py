@@ -76,7 +76,7 @@ def crt_meeting(request):
         form = MeetingCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(f'/meetings-class/{std}')
+            return redirect(f'/meetings-class/{std}/')
     context = {'form': form}
     return render(request, 'main/crt_meeting.html', context)
 
@@ -89,7 +89,7 @@ def edit_meeting(request, pk):
         form = MeetingCreationForm(request.POST, instance=meeting)
         if form.is_valid():
             form.save()
-        return redirect(f'/meetings-class/{std}')
+        return redirect(f'/meetings-class/{std}/')
     context = {'form': form, 'edit': True}
     return render(request, 'main/crt_meeting.html', context)
 
@@ -99,7 +99,7 @@ def del_meeting(request, id):
     std = meeting.std
     meeting.status = "Deleted"
     meeting.save()
-    return redirect(f'/meetings-class/{std}')
+    return redirect(f'/meetings-class/{std}/')
 
 @allowed_users(allowed_roles=['Teachers'])
 def rest_meeting(request, id):
@@ -107,7 +107,7 @@ def rest_meeting(request, id):
     std = meeting.std
     meeting.status = "Incomplete"
     meeting.save()
-    return redirect(f'/meetings-class/{std}')
+    return redirect(f'/meetings-class/{std}/')
 
 @allowed_users(allowed_roles=['Teachers'])
 def con_meeting(request, id):
@@ -119,7 +119,7 @@ def con_meeting(request, id):
     else:
         meeting.status = "Incomplete"
         meeting.save()
-    return redirect(f'/meetings-class/{std}')
+    return redirect(f'/meetings-class/{std}/')
 
 @allowed_users(allowed_roles=['Teachers'])
 def meeting_info(request, id):
@@ -154,8 +154,11 @@ def view_students(request, rollno):
     # meeting_p = Meeting.participents.all()
     meeting_a = Meeting.objects.filter(participents=student)
     meetings_count = meeting_a.count()
-    a_meet_c = Meeting.objects.filter(std=std).count()
-    over_all_attendance = meetings_count/a_meet_c*100
+    a_meet_c = Meeting.objects.filter(std=std, status="Concluded").count()
+    try:
+        over_all_attendance = meetings_count/a_meet_c*100
+    except:
+        over_all_attendance = 0
     context = {'student': student, 'std': std, 'meetings_attended': meeting_a, 'meeting_count': meetings_count,
                'a_meet_c': a_meet_c, 'over_all_attendance': over_all_attendance}
     return render(request, 'main/view_student.html', context)
@@ -167,7 +170,7 @@ def delte_student(request, rollno):
     stu_user = User.objects.get(username=student.user)
     student.delete()
     stu_user.delete()
-    return redirect(f'/students/{std}')
+    return redirect(f'/students/{std}/')
 
 
  # student dash operation views
@@ -199,4 +202,17 @@ def mark_attendance(request, id):
     meeting.save()
     return redirect("dashboard_pg")
 
+# teacher forum url
 
+@allowed_users(allowed_roles=['Teachers'])
+def forum_default(request):
+    questions_8 = Question.objects.filter(status="Unanswered", std=8)
+    questions_9 = Question.objects.filter(status="Unanswered", std=9)
+    questions_10 = Question.objects.filter(status="Unanswered", std=10)
+    context = {'questions_8': questions_8, 'questions_9': questions_9, 'questions_10': questions_10}
+    return render(request, 'main/lst_questions.html', context)
+
+def question_answer(request, id):
+    question = Question.objects.get(id=id)
+    context = {'question': question}
+    return render(request, 'main/question.html', context)

@@ -132,3 +132,6 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'nishant.nconnect@gmail.com'
 EMAIL_HOST_PASSWORD = 'qvkkywacxsqedbfs'
 EMAIL_USE_TLS = True
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets/')

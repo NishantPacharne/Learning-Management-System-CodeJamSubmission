@@ -1,0 +1,99 @@
+{% extends 'main/teacher_dash.html' %}
+
+{% block meetings %}
+
+
+<p>Questions asked by class 8th</p>
+<div class="meeting">
+    <table class="table table-sm">
+        <tr>
+            <th>Question</th>
+            <th>Subject</th>
+            <th>Asked by</th>
+            <th></th>
+        </tr>
+        {% for question in questions_8 %}
+            <tr>
+                <td>{{question.title}}</td>
+                <td>{{question.subject}}</td>
+                <td>{{question.student.rollno}}</td>
+                <td><a href="{% url 'question_view_pg' question.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<hr>
+
+<p>Questions asked by class 9th</p>
+<div class="meeting">
+    <table class="table table-sm">
+        <tr>
+            <th>Question</th>
+            <th>Subject</th>
+            <th>Asked by</th>
+            <th></th>
+        </tr>
+        {% for question in questions_9 %}
+            <tr>
+                <td>{{question.title}}</td>
+                <td>{{question.subject}}</td>
+                <td>{{question.student.rollno}}</td>
+                <td><a href="{% url 'question_view_pg' question.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<hr>
+
+<p>Questions asked by class 10th</p>
+<div class="meeting">
+    <table class="table table-sm">
+        <tr>
+            <th>Question</th>
+            <th>Subject</th>
+            <th>Asked by</th>
+            <th></th>
+        </tr>
+        {% for question in questions_10 %}
+            <tr>
+                <td>{{question.title}}</td>
+                <td>{{question.subject}}</td>
+                <td>{{question.student.rollno}}</td>
+                <td><a href="{% url 'question_view_pg' question.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock meetings %}
+
+{% block add-meeting %}
+
+<div class="add-meeting">
+    <a href="{% url 'crt_meeting_pg' %}">
+        <i class="fa fa-plus"></i>
+        <span>Ask Question</span>
+    </a>
+</div>
+
+{% endblock add-meeting %}
+
+{% block sub-nav-block %}
+
+{% if request.user.teacher %}
+
+<li><a class="sub-nav-links"href="#">Unaswered</a></li>
+<li><a class="sub-nav-links"href="#">Answered</a></li>
+
+{% else %}
+
+<li><a class="sub-nav-links"href="#">Unanswered</a></li>
+<li><a class="sub-nav-links"href="#">Answered</a></li>
+<li><a class="sub-nav-links"href="#">My Questions</a></li>
+
+{% endif %}
+
+{% endblock sub-nav-block %}
