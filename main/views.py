@@ -202,17 +202,35 @@ def mark_attendance(request, id):
     meeting.save()
     return redirect("dashboard_pg")
 
-# teacher forum url
+#
+# def forum_default(request):
+#     grp = Group.objects.get(name="Students")
+#     if grp in request.user.groups.all():
+#         return form_default_students(request)
+#     else:
+#         questions_8 = Question.objects.filter(status="Unanswered", std=8)
+#         questions_9 = Question.objects.filter(status="Unanswered", std=9)
+#         questions_10 = Question.objects.filter(status="Unanswered", std=10)
+#         context = {'questions_8': questions_8, 'questions_9': questions_9, 'questions_10': questions_10}
+#         return render(request, 'main/lst_questions.html', context)
+#
+# def question_answer(request, id):
+#     question = Question.objects.get(id=id)
+#     context = {'question': question}
+#     if Student.objects.filter(user=request.user).exists():
+#         return render(request, 'main/question_student.html', context)
+#     else:
+#         return render(request, 'main/question.html', context)
+#
+# def form_default_students(request):
+#     student = Student.objects.get(user=request.user)
+#     std = student.std
+#     questions = Question.objects.filter(std=std, status="Unanswered")
+#     context = {'questions': questions}
+#     return render(request, 'main/forum_students.html', context)
+#
+# def add_question(request):
+#     form = QuestionCreationForm
+#     context = {'form': form}
+#     return render(request, 'main/crt_question.html', context)
 
-@allowed_users(allowed_roles=['Teachers'])
-def forum_default(request):
-    questions_8 = Question.objects.filter(status="Unanswered", std=8)
-    questions_9 = Question.objects.filter(status="Unanswered", std=9)
-    questions_10 = Question.objects.filter(status="Unanswered", std=10)
-    context = {'questions_8': questions_8, 'questions_9': questions_9, 'questions_10': questions_10}
-    return render(request, 'main/lst_questions.html', context)
-
-def question_answer(request, id):
-    question = Question.objects.get(id=id)
-    context = {'question': question}
-    return render(request, 'main/question.html', context)

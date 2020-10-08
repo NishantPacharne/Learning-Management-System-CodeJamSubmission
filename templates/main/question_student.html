@@ -1,4 +1,12 @@
-{% extends 'main/teacher_dash.html' %}
+{% extends 'main/student_dash.html' %}
+
+{% block sub-nav-block %}
+
+<li><a class="sub-nav-links"href="#">Unaswered</a></li>
+<li><a class="sub-nav-links"href="#">Answered</a></li>
+<li><a class="sub-nav-links"href="#">My</a></li>
+
+{% endblock sub-nav-block %}
 
 
 {% block meetings %}
@@ -21,10 +29,3 @@
 {% block add-meeting %}
 
 {% endblock add-meeting %}
-
-{% block sub-nav-block %}
-
-<li><a class="sub-nav-links"href="#">Unaswered</a></li>
-<li><a class="sub-nav-links"href="#">Answered</a></li>
-
-{% endblock sub-nav-block %}

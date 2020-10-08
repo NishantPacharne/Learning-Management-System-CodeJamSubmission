@@ -72,12 +72,7 @@
 
 {% block add-meeting %}
 
-<div class="add-meeting">
-    <a href="{% url 'crt_meeting_pg' %}">
-        <i class="fa fa-plus"></i>
-        <span>Ask Question</span>
-    </a>
-</div>
+
 
 {% endblock add-meeting %}
 
@@ -87,13 +82,5 @@
 
 <li><a class="sub-nav-links"href="#">Unaswered</a></li>
 <li><a class="sub-nav-links"href="#">Answered</a></li>
-
-{% else %}
-
-<li><a class="sub-nav-links"href="#">Unanswered</a></li>
-<li><a class="sub-nav-links"href="#">Answered</a></li>
-<li><a class="sub-nav-links"href="#">My Questions</a></li>
-
-{% endif %}
 
 {% endblock sub-nav-block %}

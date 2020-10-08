@@ -15,7 +15,6 @@
 {% block side-menu-block %}
 
 <a class="side-menu-links {% if request.path == '/student-today-meets/' %}active {% endif %}{% if request.path == '/student-all-meets/' %}active{% endif %}"href="{% url 'dashboard_pg' %}"><i class="fa fa-video-camera"></i><span>Meetings</span></a>
-
 {% endblock side-menu-block %}
 
 {% block meetings %}
@@ -41,3 +40,10 @@
 {% endfor %}
 
 {% endblock meetings %}
+
+
+{% block add-meeting %}
+
+
+
+{% endblock add-meeting %}

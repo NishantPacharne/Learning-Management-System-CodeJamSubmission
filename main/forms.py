@@ -1,6 +1,5 @@
 from django.forms import ModelForm
 from .models import Meeting
-from django import forms
 
 class MeetingCreationForm(ModelForm):
     class Meta:

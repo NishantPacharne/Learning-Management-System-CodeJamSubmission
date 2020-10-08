@@ -1,0 +1,44 @@
+{% extends 'main/student_dash.html' %}
+{% load active_link_tags %}
+
+{% block sub-nav-block %}
+
+<li><a class="sub-nav-links {% if request.path == '/forum/' %} sub-active {% endif %}" href="{% url 'forum_default_pg' %}">Unanswered</a></li>
+<li><a class="sub-nav-links {% active_link 'student_today_meets_pg' 'sub-active' %}" href="{% url 'student_today_meets_pg' %}">Answered</a></li>
+<li><a class="sub-nav-links {% active_link 'student_all_meets_pg' 'sub-active' %}" href="{% url 'student_all_meets_pg' %}">My</a></li>
+{% endblock sub-nav-block %}
+
+
+{% block meetings %}
+
+
+<div class="meeting">
+    <table class="table table-sm">
+        <tr>
+            <th>Question</th>
+            <th>Asked By</th>
+            <th></th>
+        </tr>
+        {% for question in questions %}
+        <tr>
+            <td>{{question.title}}</td>
+            <td>{{question.student.rollno}}</td>
+            <td><a href="{% url 'question_view_pg' question.id %}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock meetings %}
+
+{% block add-meeting %}
+
+<div class="add-meeting">
+    <a href="{% url 'crt_meeting_pg' %}">
+        <i class="fa fa-plus"></i>
+        <span>Ask Question</span>
+    </a>
+</div>
+
+{% endblock add-meeting %}

@@ -3,4 +3,3 @@ from .models import *
 
 admin.site.register(Meeting)
 admin.site.register(Subject)
-admin.site.register(Question)

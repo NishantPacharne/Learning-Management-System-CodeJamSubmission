@@ -1,0 +1,14 @@
+{% extends 'main/student_dash.html' %}
+{% load crispy_forms_tags %}
+
+{% block meetings %}
+
+<div class="meeting">
+    <form action="#" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit"class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+{% endblock meetings %}

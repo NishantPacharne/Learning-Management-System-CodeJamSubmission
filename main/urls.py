@@ -44,8 +44,9 @@ urlpatterns = [
 
     # forum urls
 
-    path("forum/", views.forum_default, name="forum_default_pg"),
-    path('question/<str:id>/', views.question_answer, name="question_view_pg")
+    # path("forum/", views.forum_default, name="forum_default_pg"),
+    # path('question/<str:id>/', views.question_answer, name="question_view_pg"),
+    # path('ask-question/', views.add_question, name="ask_question_pg")
 
 ]
 
