@@ -17,7 +17,7 @@
     <header>
         <input type="checkbox" id="menu-inp">
         <nav>
-            <label class="logo"><b>N</b>-CONNECT</label>
+            <label class="logo"><a href="{% url 'dashboard_pg' %}"><b>N</b>-CONNECT</a></label>
             <ul>
                 <li>
                     <h6>Hi, {{request.user.first_name}}</h6>

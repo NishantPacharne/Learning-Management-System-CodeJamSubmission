@@ -43,7 +43,24 @@ def user_login(request):
             else:
                 messages.info(request, 'Invalid credentials given , please try again !')
                 return render(request, 'users/login.html')
-        return render(request, 'users/login.html')
+        return render(request, 'users/login_demo_pg.html')
+
+def student_demo_login(request):
+    username = 'jsd16'
+    password = 'hackathon'
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('dashboard_pg')
+
+def teacher_demo_login(request):
+    username = 'nmp16'
+    password = 'hackathon'
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('dashboard_pg')
+
 
 def user_logout(request):
     logout(request)

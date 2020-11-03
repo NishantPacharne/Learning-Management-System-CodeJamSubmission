@@ -36,18 +36,21 @@ def dashboard(request):
         context = {'meetings': stu_meeting}
         return render(request, 'main/student_dash.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def list_meetings(request, std):
     meetings = Meeting.objects.filter(std=std, status="Incomplete", date=date.today()).order_by('-id')
     context = {'meetings': meetings, 'std': std}
     return render(request, 'main/lst_meetings.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def today_meets(request, std):
     meetings = Meeting.objects.filter(std=std, date=date.today()).order_by('-id')
     context = {'meetings': meetings, 'std':std}
     return render(request, 'main/lst_meetings.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def all_meets(request, std):
     meetings = Meeting.objects.filter(std=std).order_by('-id')
@@ -55,12 +58,14 @@ def all_meets(request, std):
     return render(request, 'main/lst_meetings.html', context)
 
 # views for particular teacher to view their meetings
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def my_today_meets(request):
     meetings = Meeting.objects.filter(subject__teacher=request.user.id, date=date.today()).order_by('-id')
     context = {'meetings': meetings}
     return render(request, 'main/lst_meetings.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def my_all_meets(request):
     meetings = Meeting.objects.filter(subject__teacher=request.user.id).order_by('-id')
@@ -68,6 +73,7 @@ def my_all_meets(request):
     return render(request, 'main/lst_meetings.html', context)
 
 # meeting crud views
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def crt_meeting(request):
     form = MeetingCreationForm()
@@ -80,6 +86,7 @@ def crt_meeting(request):
     context = {'form': form}
     return render(request, 'main/crt_meeting.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def edit_meeting(request, pk):
     meeting = Meeting.objects.get(id=pk)
@@ -93,6 +100,7 @@ def edit_meeting(request, pk):
     context = {'form': form, 'edit': True}
     return render(request, 'main/crt_meeting.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def del_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
@@ -101,6 +109,7 @@ def del_meeting(request, id):
     meeting.save()
     return redirect(f'/meetings-class/{std}/')
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def rest_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
@@ -109,6 +118,7 @@ def rest_meeting(request, id):
     meeting.save()
     return redirect(f'/meetings-class/{std}/')
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def con_meeting(request, id):
     meeting = Meeting.objects.get(id=id)
@@ -121,6 +131,7 @@ def con_meeting(request, id):
         meeting.save()
     return redirect(f'/meetings-class/{std}/')
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def meeting_info(request, id):
     meeting = Meeting.objects.get(id=id)
@@ -140,6 +151,7 @@ def meeting_info(request, id):
 
 # student management views
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def all_stu(request, std):
     students_a = Student.objects.filter(std=std, div="A").order_by('rollno')
@@ -147,6 +159,7 @@ def all_stu(request, std):
     context = {'students_a': students_a, 'students_b': students_b, 'std': std}
     return render(request, 'main/lst_students.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def view_students(request, rollno):
     student = Student.objects.get(rollno=rollno)
@@ -154,7 +167,7 @@ def view_students(request, rollno):
     # meeting_p = Meeting.participents.all()
     meeting_a = Meeting.objects.filter(participents=student)
     meetings_count = meeting_a.count()
-    a_meet_c = Meeting.objects.filter(std=std, status="Concluded").count()
+    a_meet_c = Meeting.objects.filter(std=std).count()
     try:
         over_all_attendance = meetings_count/a_meet_c*100
     except:
@@ -163,6 +176,7 @@ def view_students(request, rollno):
                'a_meet_c': a_meet_c, 'over_all_attendance': over_all_attendance}
     return render(request, 'main/view_student.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Teachers'])
 def delte_student(request, rollno):
     student = Student.objects.get(rollno=rollno)
@@ -175,6 +189,7 @@ def delte_student(request, rollno):
 
  # student dash operation views
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Students'])
 def student_today_meets(request):
     student = Student.objects.get(user=request.user)
@@ -183,6 +198,7 @@ def student_today_meets(request):
     context = {'meetings': meetings}
     return render(request, 'main/student_dash.html', context)
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Students'])
 def student_all_meets(request):
     student = Student.objects.get(user=request.user)
@@ -193,6 +209,7 @@ def student_all_meets(request):
 
 #  marking attendance views
 
+@login_required(login_url='login_pg')
 @allowed_users(allowed_roles=['Students'])
 def mark_attendance(request, id):
     meeting = Meeting.objects.get(id=id)
@@ -202,35 +219,5 @@ def mark_attendance(request, id):
     meeting.save()
     return redirect("dashboard_pg")
 
-#
-# def forum_default(request):
-#     grp = Group.objects.get(name="Students")
-#     if grp in request.user.groups.all():
-#         return form_default_students(request)
-#     else:
-#         questions_8 = Question.objects.filter(status="Unanswered", std=8)
-#         questions_9 = Question.objects.filter(status="Unanswered", std=9)
-#         questions_10 = Question.objects.filter(status="Unanswered", std=10)
-#         context = {'questions_8': questions_8, 'questions_9': questions_9, 'questions_10': questions_10}
-#         return render(request, 'main/lst_questions.html', context)
-#
-# def question_answer(request, id):
-#     question = Question.objects.get(id=id)
-#     context = {'question': question}
-#     if Student.objects.filter(user=request.user).exists():
-#         return render(request, 'main/question_student.html', context)
-#     else:
-#         return render(request, 'main/question.html', context)
-#
-# def form_default_students(request):
-#     student = Student.objects.get(user=request.user)
-#     std = student.std
-#     questions = Question.objects.filter(std=std, status="Unanswered")
-#     context = {'questions': questions}
-#     return render(request, 'main/forum_students.html', context)
-#
-# def add_question(request):
-#     form = QuestionCreationForm
-#     context = {'form': form}
-#     return render(request, 'main/crt_question.html', context)
+
 
