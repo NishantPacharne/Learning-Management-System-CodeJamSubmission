@@ -16,7 +16,7 @@ This project is made to make the online learning process more efficient. This we
 * Features like forget password are also available 
 ---
 ## Installation
-* It is recomended to use a vierual env
+* It is recomended to use a virtual env
 
 * Install all the prerequisites 
     > pip install -r requirements.txt
